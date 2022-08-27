@@ -5,12 +5,13 @@ from csv import writer
 unknown_price = 'Call for Price'
 
 air_man = input("CESSNA, PIPER, or BEECHCRAFT? Answer in ALL CAPS. ")
-if(air_man == 'CESSNA'):
-        air_type = input("What type of CESSNA? 140, 150, 152, 170, 172, 175, 177, or 182? ")
-elif(air_man == 'PIPER'):
         air_type = input("What type of PIPER? ARCHER, J, CHEROKEE+PA28, CHEROKEE+PA32, or WARRIOR? ")
-elif(air_man == 'BEECHCRAFT'):
-        air_type = input("What type of BEECHCRAFT? 33+BONANZA, 35+BONANZA, or MUSKETEER? ")
+if air_man == 'CESSNA':
+    air_type = input("What type of CESSNA? 140, 150, 152, 170, 172, 175, 177, or 182? ")
+elif air_man == 'PIPER':
+    air_type = input("What type of PIPER? ARCHER, J, CHEROKEE+PA28, CHEROKEE+PA32, or WARRIOR? ")
+elif air_man == 'BEECHCRAFT':
+    air_type = input("What type of BEECHCRAFT? 33+BONANZA, 35+BONANZA, or MUSKETEER? ")
 else:
     print('Double check your spelling. ')
 
@@ -44,6 +45,20 @@ with open(air_man + air_type + '.csv', 'w', encoding='utf8', newline='') as f:
                 airplane_location = airplane.find('p', class_='address').text.replace('\n', '')
                 airplane_description = airplane.find('p', class_='description').text.replace('More Info', '')
                 more_info = airplane.h3.a['href']
+
+                """""
+
+                Code below finds the individual listing ID of each airplane, and writes it into the URL.
+                Need to find a way to extract additional information from the link.
+                Tested with BS and printing true/false if info was there, but majority is False.
+                So even if I could pull the info the majority would be N/A
+
+                id_text = airplane.find('a', class_="log_listing_click")
+                id_num = str(id_text).split("data-listing_id=")[1][1:].split('"')[0]
+                url_two = f"https://www.trade-a-plane.com/search?s-type=aircraft&listing_id={id_num}"
+
+                """
+
                 if unknown_price not in airplane_price:
                     print(f"Type: {airplane_name.strip()}")
                     print(f"Reg Num: {airplane_reg_num.strip()}")
@@ -90,8 +105,12 @@ with open(air_man + air_type + '.csv', 'w', encoding='utf8', newline='') as f:
 
 print('Search Finished')
 
+"""""
+
 # Things to continue working on:
 # 1) Clean up the code. Can the for airplane in airplanes be created as a function?
 # 2) Pull additional information: Can I ask the program to open other sites and pull in additional information?
     #Engine Time, Total Time, ADSB, etc.
 # 3) Learn how to move the Excel files to a dedicated folder in a different spot on my cpu
+
+"""
