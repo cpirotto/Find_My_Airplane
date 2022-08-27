@@ -5,7 +5,6 @@ from csv import writer
 unknown_price = 'Call for Price'
 
 air_man = input("CESSNA, PIPER, or BEECHCRAFT? Answer in ALL CAPS. ")
-        air_type = input("What type of PIPER? ARCHER, J, CHEROKEE+PA28, CHEROKEE+PA32, or WARRIOR? ")
 if air_man == 'CESSNA':
     air_type = input("What type of CESSNA? 140, 150, 152, 170, 172, 175, 177, or 182? ")
 elif air_man == 'PIPER':
